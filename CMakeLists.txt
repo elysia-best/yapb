@@ -43,7 +43,7 @@ else()
     target_link_libraries(yapb PRIVATE m dl pthread)
 endif()
 
-if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^arm")
+if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^arm" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch")
     target_compile_options(yapb PRIVATE -mmmx -msse -msse2 -msse3 -mssse3 -mfpmath=sse)
 endif()
 
