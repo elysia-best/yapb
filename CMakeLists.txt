@@ -31,10 +31,7 @@ set(YAPB_SRC
 add_library(yapb MODULE ${YAPB_SRC})
 
 if(NOT MSVC)
-    target_compile_options(yapb PRIVATE
-        -fno-threadsafe-statics
-        -pthread
-    )
+    target_compile_options(yapb PRIVATE -fno-threadsafe-statics -pthread)
 endif()
 
 if(WIN32)
@@ -44,6 +41,9 @@ elseif(ANDROID)
     target_link_libraries(yapb PRIVATE m dl log)
 else()
     target_link_libraries(yapb PRIVATE m dl pthread)
+endif()
+
+if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^arm")
     target_compile_options(yapb PRIVATE -mmmx -msse -msse2 -msse3 -mssse3 -mfpmath=sse)
 endif()
 
