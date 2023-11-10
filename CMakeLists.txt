@@ -37,13 +37,13 @@ endif()
 if(WIN32)
     target_link_libraries(yapb PRIVATE ws2_32)
 elseif(ANDROID)
-    target_compile_definitions(yapb PRIVATE -DCR_ANDROID)
     target_link_libraries(yapb PRIVATE m dl log)
 else()
     target_link_libraries(yapb PRIVATE m dl pthread)
 endif()
 
-if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^arm" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch")
+if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^arm" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch"
+	AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^powerpc" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
     target_compile_options(yapb PRIVATE -mmmx -msse -msse2 -msse3 -mssse3 -mfpmath=sse)
 endif()
 
