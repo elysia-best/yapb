@@ -44,7 +44,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     
         if(NOT WIN32 AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64" AND NOT CMAKE_SYSTEM_PROCESSOR STREQUAL "arm" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
             target_compile_options(yapb PRIVATE -fdata-sections -ffunction-sections -fcf-protection=none)
-            target_link_options(yapb PRIVATE -Wl,--version-script=../ext/ldscripts/version.lds -Wl,--gc-sections)
+            target_link_options(yapb PRIVATE -Wl,--version-script=ext/ldscripts/version.lds -Wl,--gc-sections)
     
             if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
                 target_compile_options(yapb PRIVATE -fgraphite-identity -floop-nest-optimize)
@@ -60,7 +60,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     endif()
 
     if(WIN32 AND CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-        target_link_options(yapb PRIVATE -Xlinker --script -Xlinker ../ext/ldscripts/i386pe.lds)
+        target_link_options(yapb PRIVATE -Xlinker --script -Xlinker ext/ldscripts/i386pe.lds)
     endif()
 
     if(WIN32 AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
