@@ -296,7 +296,9 @@ shared_library(
    sources,
    include_directories: includes,
    gnu_symbol_visibility: 'hidden',
-   name_prefix: ''
+   name_prefix: '',
+   install: true,
+   install_dir: 'cstrike/dlls'
 )
 
 run_target('package',
