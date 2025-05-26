@@ -35,7 +35,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         target_compile_options(yapb PRIVATE -march=armv8-a+fp+simd)
-    elseif(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "arm" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
+    elseif(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "arm" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^loong")
         target_compile_options(yapb PRIVATE -mmmx -msse -msse2 -msse3 -mssse3 -mfpmath=sse)
     endif()
 
