@@ -37,6 +37,9 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         target_compile_options(yapb PRIVATE -march=armv8-a+fp+simd)
     elseif(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "arm" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^loong")
         target_compile_options(yapb PRIVATE -mmmx -msse -msse2 -msse3 -mssse3 -mfpmath=sse)
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^loong")
+        # We need -O3 in order to let compiler optimise lasx instructions
+        target_compile_options(yapb PRIVATE -O3 -march=loongarch64 -msimd=lasx)
     endif()
 
     if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
